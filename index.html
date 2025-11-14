@@ -181,7 +181,7 @@
         background: #1f2937;
         border-radius: 1rem;
         padding: 2rem;
-        max-width: 600px;
+        max-width: 800px;
         width: 90%;
         max-height: 90vh;
         overflow-y: auto;
@@ -285,6 +285,85 @@
       .carousel-indicator.active {
         background: #f59e0b;
       }
+      
+      /* Player section styles */
+      .player-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 15px;
+        margin-bottom: 15px;
+        align-items: start;
+      }
+      
+      .remove-player {
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        margin-top: 5px;
+      }
+      
+      .remove-player:hover {
+        background-color: #dc2626;
+      }
+      
+      .player-count {
+        color: #fbbf24;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      
+      .team-id-display {
+        background: linear-gradient(90deg, #f59e0b, #fbbf24);
+        color: #1e293b;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .team-id-label {
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+      
+      .team-id-value {
+        font-size: 1.3rem;
+        letter-spacing: 1px;
+      }
+      
+      .success-message {
+        background-color: #10b981;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 20px;
+        text-align: center;
+        display: none;
+      }
+      
+      @media (max-width: 768px) {
+        .player-row {
+          grid-template-columns: 1fr;
+        }
+        
+        .remove-player {
+          width: 100%;
+          margin-top: 0;
+        }
+      }
     </style>
   </head>
 
@@ -350,8 +429,8 @@
           <li>
             <a
               href="#"
-              class="hover:text-yellow-400 transition duration-300 register-link"
-              >Register</a
+              class="bg-yellow-500 text-gray-900 font-bold px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 pulse-animation register-link"
+              >Register Now</a
             >
           </li>
         </ul>
@@ -434,8 +513,8 @@
         <li>
           <a
             href="#"
-            class="block py-2 text-lg hover:text-yellow-400 transition duration-300 register-link"
-            >Register</a
+            class="block py-2 text-lg bg-yellow-500 text-gray-900 font-bold rounded-lg text-center register-link"
+            >Register Now</a
           >
         </li>
         <li>
@@ -471,83 +550,109 @@
           captains should complete this form.
         </p>
 
+        <!-- Team ID Display -->
+        <div id="teamIdDisplay" class="team-id-display" style="display: none;">
+          <span class="team-id-label">Your Team ID:</span>
+          <span class="team-id-value" id="teamIdValue">SKC-2025-XXXX</span>
+        </div>
+
         <form
           id="registrationForm"
           class="space-y-6"
         >
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <input
-                type="text"
-                name="captain"
-                placeholder="Captain Name *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-                pattern="[A-Za-z\s]+"
-                title="Please enter letters only"
-              />
-              <div class="error-message" id="captainError">Please enter a valid name (letters only)</div>
+          <!-- Captain Information Section -->
+          <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+            <h3 class="text-xl font-bold text-yellow-400 mb-4">Captain Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <input
+                  type="text"
+                  name="captain"
+                  placeholder="Captain Name *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                  pattern="[A-Za-z\s]+"
+                  title="Please enter letters only"
+                />
+                <div class="error-message" id="captainError">Please enter a valid name (letters only)</div>
+              </div>
+              <div>
+                <input
+                  type="tel"
+                  name="mobile"
+                  placeholder="Captain Mobile Number *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                  pattern="[0-9]{10}"
+                  title="Please enter a valid 10-digit mobile number"
+                />
+                <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
+              </div>
             </div>
-            <div>
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="Captain Mobile Number *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-                pattern="[0-9]{10}"
-                title="Please enter a valid 10-digit mobile number"
-              />
-              <div class="error-message" id="mobileError">Please enter a valid 10-digit mobile number</div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <input
+                  type="text"
+                  name="college"
+                  placeholder="College *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="aadhar"
+                  placeholder="Captain Aadhar Card No *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                  pattern="[0-9]{12}"
+                  title="Please enter a valid 12-digit Aadhar number"
+                />
+                <div class="error-message" id="aadharError">Please enter a valid 12-digit Aadhar number</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <input
+                  type="tel"
+                  name="alt_contact"
+                  placeholder="Alternative Number *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                  pattern="[0-9]{10}"
+                  title="Please enter a valid 10-digit mobile number"
+                />
+                <div class="error-message" id="altContactError">Please enter a valid 10-digit mobile number</div>
+              </div>
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email ID *"
+                  class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+                  required
+                />
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+              </div>
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <input
-                type="text"
-                name="college"
-                placeholder="College *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-              />
+          <!-- Players Information Section -->
+          <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+              <h3 class="text-xl font-bold text-yellow-400">Team Players Information</h3>
+              <button type="button" id="addPlayer" class="bg-yellow-500 text-gray-900 font-bold px-4 py-2 rounded-lg hover:bg-yellow-400 transition duration-300 mt-2 md:mt-0">
+                <i class="fas fa-plus mr-2"></i>Add Player
+              </button>
             </div>
-            <div>
-              <input
-                type="text"
-                name="aadhar"
-                placeholder="Captain Aadhar Card No *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-                pattern="[0-9]{12}"
-                title="Please enter a valid 12-digit Aadhar number"
-              />
-              <div class="error-message" id="aadharError">Please enter a valid 12-digit Aadhar number</div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <input
-                type="tel"
-                name="alt_contact"
-                placeholder="Alternative Number *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-                pattern="[0-9]{10}"
-                title="Please enter a valid 10-digit mobile number"
-              />
-              <div class="error-message" id="altContactError">Please enter a valid 10-digit mobile number</div>
-            </div>
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email ID *"
-                class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
-                required
-              />
-              <div class="error-message" id="emailError">Please enter a valid email address</div>
+            <p class="text-gray-300 mb-2 text-sm">Minimum 7 players (excluding captain), maximum 15 players (including captain).</p>
+            <p class="player-count" id="playerCount">Players: 0/15</p>
+            
+            <div id="playersContainer">
+              <!-- Player fields will be added here dynamically -->
             </div>
           </div>
 
@@ -557,13 +662,11 @@
           >
             Register Team
           </button>
-          <p
-            id="successMessage"
-            class="hidden text-green-400 font-semibold mt-3 text-lg text-center"
-          >
-            <i class="fas fa-check-circle mr-2"></i> Registration Submitted
-            Successfully!
-          </p>
+          
+          <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle mr-2"></i> Registration Submitted Successfully!
+            <div class="mt-2">Your Team ID: <strong id="successTeamId">SKC-2025-XXXX</strong></div>
+          </div>
         </form>
       </div>
     </div>
@@ -692,180 +795,6 @@
     <div class="section-divider"></div>
 
     <!-- =========================
-       RULES SECTION
-    ========================== -->
-<!-- <section id="rules" class="py-16 bg-gray-800">
-  <div class="max-w-4xl mx-auto px-6">
-    <h2
-      class="text-4xl md:text-5xl font-bold text-yellow-400 mb-6 heading-font text-center"
-    >
-      Rules & Regulations
-    </h2>
-    <p class="text-gray-300 text-2xl font-bold text-center mb-8">
-      Follow the fair play spirit of the game!
-    </p>
-    <div
-      class="bg-gray-900 rounded-2xl p-8 shadow-xl border border-yellow-500/20"
-    >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Left Column - 6 Rules -->
-        <!-- <div class="space-y-4">
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">College Requirement</h3>
-              <p class="text-gray-400">
-                All team members must be from the same college.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-user-check"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Player Eligibility</h3>
-              <p class="text-gray-400">
-                Each player can represent only one team. Playing for multiple teams leads to disqualification of team.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-users"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Team Format</h3>
-              <p class="text-gray-400">
-                7 players + 3 substitutes per team; rolling substitutions allowed.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-clock"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Match Time</h3>
-              <p class="text-gray-400">
-                10-minute halves; in case of a tie → 3 penalties.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-futbol"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Gameplay</h3>
-              <p class="text-gray-400">
-                No offside rule; no slide tackling.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-hands"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Goalkeeper Rules</h3>
-              <p class="text-gray-400">
-                Goalkeepers cannot throw the ball past the half line, cannot take volleys, and must release the ball within 4-6 seconds.
-              </p>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- Right Column - 6 Rules -->
-        <!-- <div class="space-y-4">
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-id-card"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Required Documents</h3>
-              <p class="text-gray-400">
-                Students must bring original Aadhar Card and College ID Card for verification.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-file-alt"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Document Verification</h3>
-              <p class="text-gray-400">
-                Teams submitting false or invalid documents will be disqualification of team.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-exchange-alt"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Throw-ins & Restarts</h3>
-              <p class="text-gray-400">
-                All throw-ins and outside balls must be taken from a grounded kick.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Discipline</h3>
-              <p class="text-gray-400">
-                Yellow card → 3 minutes out; Red card → suspended for current & next match.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-user-shield"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Conduct</h3>
-              <p class="text-gray-400">
-                Only captains may speak to referees. Misconduct leads to team elimination.
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-              <i class="fas fa-ban"></i>
-            </div>
-            <div>
-              <h3 class="text-lg font-bold text-white">Zero Tolerance</h3>
-              <p class="text-gray-400">
-                Any fights or serious misconduct will result in immediate team elimination.
-              </p>
-            </div>
-          </div>
-        </div> -->
-      <!-- </div> -->
-      
-      <!-- Referee Decision - Full Width -->
-      <!-- <div class="mt-6 p-4 bg-gray-800 rounded-lg">
-        <div class="flex items-start">
-          <div class="bg-yellow-500 text-gray-900 rounded-full p-2 mr-4 flex-shrink-0">
-            <i class="fas fa-gavel"></i>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-white">Referee Decision</h3>
-            <p class="text-gray-400">
-              The referee's decision is final and binding in all matters.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- =========================
        RULES SECTION
     ========================== -->
 <section id="rules" class="py-16 bg-gray-800">
@@ -1324,68 +1253,6 @@
   </div>
 </section>
 
-    <!-- <div class="section-divider"></div> -->
-
-          <!-- Carousel 3 - Behind the Scenes -->
-          <!-- <div>
-            <h3 class="text-xl font-bold text-white mb-4">Behind the Scenes</h3>
-            <div class="carousel-container" id="carousel3"> -->
-              <!-- Slide 1 -->
-              <!-- <div class="carousel-slide active">
-                <img
-                  src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Behind the Scenes 1"
-                  class="carousel-image"
-                />
-                <div class="carousel-caption">
-                  <p>Preparation and setup</p>
-                </div>
-              </div> -->
-
-              <!-- Slide 2 -->
-              <!-- <div class="carousel-slide">
-                <img
-                  src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Behind the Scenes 2"
-                  class="carousel-image"
-                />
-                <div class="carousel-caption">
-                  <p>Team huddle</p>
-                </div>
-              </div> -->
-
-              <!-- Slide 3 -->
-              <!-- <div class="carousel-slide">
-                <img
-                  src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                  alt="Behind the Scenes 3"
-                  class="carousel-image"
-                />
-                <div class="carousel-caption">
-                  <p>Fan interactions</p>
-                </div>
-              </div> -->
-
-              <!-- Navigation Buttons -->
-              <!-- <button class="carousel-nav carousel-prev" data-carousel="3">
-                <i class="fas fa-chevron-left"></i>
-              </button>
-              <button class="carousel-nav carousel-next" data-carousel="3">
-                <i class="fas fa-chevron-right"></i>
-              </button> -->
-
-              <!-- Indicators -->
-              <!-- <div class="carousel-indicators">
-                <div class="carousel-indicator active" data-carousel="3" data-slide="0"></div>
-                <div class="carousel-indicator" data-carousel="3" data-slide="1"></div>
-                <div class="carousel-indicator" data-carousel="3" data-slide="2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </section>
-
     <div class="section-divider"></div>
 
     <!-- =========================
@@ -1677,6 +1544,7 @@
         link.addEventListener("click", (e) => {
           e.preventDefault();
           registrationModal.classList.add("open");
+          generateTeamId();
         });
       });
 
@@ -1691,10 +1559,137 @@
         }
       });
 
+      // Generate a unique team ID
+      function generateTeamId() {
+        const timestamp = Date.now().toString().slice(-6);
+        const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+        const teamId = `SKC-2025-${timestamp}${randomNum}`;
+        
+        document.getElementById('teamIdValue').textContent = teamId;
+        document.getElementById('teamIdDisplay').style.display = 'flex';
+        return teamId;
+      }
+
+      // Player Management Functionality
+      const playersContainer = document.getElementById('playersContainer');
+      const addPlayerButton = document.getElementById('addPlayer');
+      const playerCountDisplay = document.getElementById('playerCount');
+      
+      let playerCount = 0;
+      const minPlayers = 7; // Minimum players excluding captain
+      const maxPlayers = 15; // Maximum players including captain
+
+      // Add initial player fields
+      addPlayer();
+
+      // Add player button event listener
+      addPlayerButton.addEventListener('click', function() {
+        if (playerCount < maxPlayers - 1) { // -1 because captain is already counted
+          addPlayer();
+        } else {
+          alert(`Maximum ${maxPlayers} players allowed (including captain).`);
+        }
+      });
+
+      function addPlayer() {
+        playerCount++;
+        const playerRow = document.createElement('div');
+        playerRow.className = 'player-row';
+        playerRow.id = `player-${playerCount}`;
+        
+        playerRow.innerHTML = `
+          <div>
+            <input
+              type="text"
+              name="player_name[]"
+              placeholder="Player ${playerCount} Name *"
+              class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+              required
+              pattern="[A-Za-z\s]+"
+              title="Please enter letters only"
+            />
+            <div class="error-message">Please enter a valid name (letters only)</div>
+          </div>
+          <div>
+            <input
+              type="text"
+              name="player_aadhar[]"
+              placeholder="Player ${playerCount} Aadhar Card No *"
+              class="w-full p-4 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-yellow-500 focus:outline-none transition"
+              required
+              pattern="[0-9]{12}"
+              title="Please enter a valid 12-digit Aadhar number"
+            />
+            <div class="error-message">Please enter a valid 12-digit Aadhar number</div>
+          </div>
+          ${playerCount > minPlayers ? `<button type="button" class="remove-player" data-id="${playerCount}"><i class="fas fa-trash"></i></button>` : '<div></div>'}
+        `;
+        
+        playersContainer.appendChild(playerRow);
+        updatePlayerCount();
+        
+        // Add event listener to remove button if it exists
+        const removeButton = playerRow.querySelector('.remove-player');
+        if (removeButton) {
+          removeButton.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            removePlayer(id);
+          });
+        }
+        
+        // Update form validation for minimum players
+        updateFormValidation();
+      }
+
+      function removePlayer(id) {
+        const playerRow = document.getElementById(`player-${id}`);
+        if (playerRow) {
+          playersContainer.removeChild(playerRow);
+          playerCount--;
+          renumberPlayers();
+          updatePlayerCount();
+          updateFormValidation();
+        }
+      }
+
+      function renumberPlayers() {
+        const playerRows = playersContainer.querySelectorAll('.player-row');
+        playerRows.forEach((row, index) => {
+          const playerNumber = index + 1;
+          row.id = `player-${playerNumber}`;
+          
+          const nameInput = row.querySelector('input[name="player_name[]"]');
+          const aadharInput = row.querySelector('input[name="player_aadhar[]"]');
+          const removeButton = row.querySelector('.remove-player');
+          
+          nameInput.placeholder = `Player ${playerNumber} Name *`;
+          aadharInput.placeholder = `Player ${playerNumber} Aadhar Card No *`;
+          
+          if (removeButton) {
+            removeButton.setAttribute('data-id', playerNumber);
+          }
+        });
+      }
+
+      function updatePlayerCount() {
+        playerCountDisplay.textContent = `Players: ${playerCount}/${maxPlayers-1}`;
+        
+        if (playerCount < minPlayers) {
+          playerCountDisplay.style.color = '#f87171';
+        } else {
+          playerCountDisplay.style.color = '#fbbf24';
+        }
+      }
+
+      function updateFormValidation() {
+        // This function would handle form validation logic
+        // You can add custom validation here if needed
+      }
+
       // Input validation functions
       function validateName(input) {
         const namePattern = /^[A-Za-z\s]+$/;
-        const errorElement = document.getElementById('captainError');
+        const errorElement = input.nextElementSibling;
         
         if (!namePattern.test(input.value)) {
           input.classList.add('input-error');
@@ -1709,7 +1704,7 @@
 
       function validateMobile(input) {
         const mobilePattern = /^[0-9]{10}$/;
-        const errorElement = document.getElementById('mobileError');
+        const errorElement = input.nextElementSibling;
         
         if (!mobilePattern.test(input.value)) {
           input.classList.add('input-error');
@@ -1724,7 +1719,7 @@
 
       function validateAadhar(input) {
         const aadharPattern = /^[0-9]{12}$/;
-        const errorElement = document.getElementById('aadharError');
+        const errorElement = input.nextElementSibling;
         
         if (!aadharPattern.test(input.value)) {
           input.classList.add('input-error');
@@ -1739,7 +1734,7 @@
 
       function validateAltContact(input) {
         const mobilePattern = /^[0-9]{10}$/;
-        const errorElement = document.getElementById('altContactError');
+        const errorElement = input.nextElementSibling;
         
         if (!mobilePattern.test(input.value)) {
           input.classList.add('input-error');
@@ -1754,7 +1749,7 @@
 
       function validateEmail(input) {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const errorElement = document.getElementById('emailError');
+        const errorElement = input.nextElementSibling;
         
         if (!emailPattern.test(input.value)) {
           input.classList.add('input-error');
@@ -1769,50 +1764,29 @@
 
       // Add event listeners for real-time validation
       document.addEventListener('DOMContentLoaded', function() {
-      //form data submit 
         const form = document.getElementById('registrationForm');
-        if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
+        
+        // Real-time validation for all inputs
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+          input.addEventListener('input', function() {
+            if (this.name === 'captain') {
+              validateName(this);
+            } else if (this.name === 'mobile' || this.name === 'alt_contact') {
+              validateMobile(this);
+            } else if (this.name === 'aadhar' || this.name.includes('player_aadhar')) {
+              validateAadhar(this);
+            } else if (this.name === 'email') {
+              validateEmail(this);
+            }
+          });
+        });
 
-        const formData = new FormData(this);
-        const successMessage = document.getElementById("successMessage");
-
-        // 🔸 Show success instantly
-        successMessage.classList.remove("d-none");
-        this.reset();
-
-        // 🔸 Send data in background (no delay to user)
-        fetch(
-          "https://script.google.com/macros/s/AKfycbwCNgPZYfM7UwMYZRo0UfrwKXaTopZhUa-ClmkqhMo7ucaTRoA-uzY_1YePZ55R8Pw/exec",
-          {
-            method: "POST",
-            body: formData,
-          }
-        ).catch((error) => console.error("Background submit failed:", error));
-      });
-    }
-        const captainInput = form.querySelector('input[name="captain"]');
-        const mobileInput = form.querySelector('input[name="mobile"]');
-        const aadharInput = form.querySelector('input[name="aadhar"]');
-        const altContactInput = form.querySelector('input[name="alt_contact"]');
-        const emailInput = form.querySelector('input[name="email"]');
-
-        captainInput.addEventListener('input', () => validateName(captainInput));
-        mobileInput.addEventListener('input', () => validateMobile(mobileInput));
-        aadharInput.addEventListener('input', () => validateAadhar(aadharInput));
-        altContactInput.addEventListener('input', () => validateAltContact(altContactInput));
-        emailInput.addEventListener('input', () => validateEmail(emailInput));
-      });
-
-      // Registration Form with validation
-      document
-        .getElementById("registrationForm")
-        .addEventListener("submit", (e) => {
+        // Form submission handling
+        form.addEventListener('submit', function(e) {
           e.preventDefault();
           
           // Validate all fields
-          const form = e.target;
           const captainInput = form.querySelector('input[name="captain"]');
           const mobileInput = form.querySelector('input[name="mobile"]');
           const aadharInput = form.querySelector('input[name="aadhar"]');
@@ -1825,17 +1799,39 @@
           const isAltContactValid = validateAltContact(altContactInput);
           const isEmailValid = validateEmail(emailInput);
           
+          // Validate minimum players
+          if (playerCount < minPlayers) {
+            alert(`Please add at least ${minPlayers} players (excluding captain).`);
+            return;
+          }
+          
           if (isNameValid && isMobileValid && isAadharValid && isAltContactValid && isEmailValid) {
-            document.getElementById("successMessage").classList.remove("hidden");
+            const teamId = document.getElementById('teamIdValue').textContent;
+            document.getElementById('successTeamId').textContent = teamId;
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Here you would typically send the form data to your server
+            // For demonstration, we'll just log the data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            console.log('Team ID:', teamId);
+            console.log('Form data:', data);
+            
+            // Reset form after 3 seconds
             setTimeout(() => {
-              e.target.reset();
-              registrationModal.classList.remove("open");
-              setTimeout(() => {
-                document.getElementById("successMessage").classList.add("hidden");
-              }, 1000);
+              form.reset();
+              document.getElementById('successMessage').style.display = 'none';
+              registrationModal.classList.remove('open');
+              
+              // Reset player count
+              playersContainer.innerHTML = '';
+              playerCount = 0;
+              addPlayer();
+              updatePlayerCount();
             }, 3000);
           }
         });
+      });
 
       // Smooth scrolling for navigation links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1893,75 +1889,74 @@
       updateCountdown(); // Initial call
 
       // Multiple Carousel Functionality
-  // Multiple Carousel Functionality - FIXED
-  document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all carousels
-    const carousels = document.querySelectorAll('.carousel-container');
-    
-    carousels.forEach((carousel, index) => {
-      const slides = carousel.querySelectorAll('.carousel-slide');
-      const prevBtn = carousel.querySelector('.carousel-prev');
-      const nextBtn = carousel.querySelector('.carousel-next');
-      let currentSlide = 0;
-      let slideInterval;
-
-      // Function to show a specific slide
-      function showSlide(index) {
-        // Hide all slides
-        slides.forEach(slide => slide.classList.remove('active'));
+      document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all carousels
+        const carousels = document.querySelectorAll('.carousel-container');
         
-        // Show the selected slide
-        slides[index].classList.add('active');
-        currentSlide = index;
-      }
+        carousels.forEach((carousel, index) => {
+          const slides = carousel.querySelectorAll('.carousel-slide');
+          const prevBtn = carousel.querySelector('.carousel-prev');
+          const nextBtn = carousel.querySelector('.carousel-next');
+          let currentSlide = 0;
+          let slideInterval;
 
-      // Function to show next slide
-      function nextSlide() {
-        let nextIndex = (currentSlide + 1) % slides.length;
-        showSlide(nextIndex);
-      }
+          // Function to show a specific slide
+          function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            // Show the selected slide
+            slides[index].classList.add('active');
+            currentSlide = index;
+          }
 
-      // Function to show previous slide
-      function prevSlide() {
-        let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(prevIndex);
-      }
+          // Function to show next slide
+          function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+          }
 
-      // Event listeners for navigation buttons
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetInterval();
+          // Function to show previous slide
+          function prevSlide() {
+            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevIndex);
+          }
+
+          // Event listeners for navigation buttons
+          nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+          });
+          
+          prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+          });
+
+          // Auto-advance slides - SLOWER (8 seconds)
+          function startInterval() {
+            slideInterval = setInterval(nextSlide, 8000);
+          }
+
+          // Reset interval when user interacts with carousel
+          function resetInterval() {
+            clearInterval(slideInterval);
+            startInterval();
+          }
+
+          // Start the auto-advance
+          startInterval();
+
+          // Pause on hover
+          carousel.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+          });
+          
+          carousel.addEventListener('mouseleave', () => {
+            startInterval();
+          });
+        });
       });
-      
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetInterval();
-      });
-
-      // Auto-advance slides - SLOWER (8 seconds)
-      function startInterval() {
-        slideInterval = setInterval(nextSlide, 8000);
-      }
-
-      // Reset interval when user interacts with carousel
-      function resetInterval() {
-        clearInterval(slideInterval);
-        startInterval();
-      }
-
-      // Start the auto-advance
-      startInterval();
-
-      // Pause on hover
-      carousel.addEventListener('mouseenter', () => {
-        clearInterval(slideInterval);
-      });
-      
-      carousel.addEventListener('mouseleave', () => {
-        startInterval();
-      });
-    });
-  });
-</script>
+    </script>
   </body>
 </html>
