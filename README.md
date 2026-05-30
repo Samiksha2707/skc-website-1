@@ -1,9 +1,10 @@
-# ⚽ Soccer Knockout Challenge 2025 – Team Registration Website
+⚽ Soccer Knockout Challenge 2025 – Team Registration Website
 
-A modern, responsive one-page website for **Soccer Knockout Challenge 2025**, built using **HTML, CSS (Bootstrap)**, and **JavaScript**.  
-It features an interactive **team registration modal form** that automatically stores all registrations in **Google Sheets** using **Google Apps Script** — no backend server required.
+🌐 Live Website: https://samiksha2707.github.io/skc-website-1/
 
----
+A modern, responsive one-page website for Soccer Knockout Challenge 2025, built using HTML, CSS (Bootstrap), and JavaScript.
+
+The website features an interactive Team Registration Form that automatically stores submissions in Google Sheets using Google Apps Script.
 
 ## 🚀 Features
 
