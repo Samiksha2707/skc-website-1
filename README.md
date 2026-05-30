@@ -17,12 +17,13 @@ The website features an interactive Team Registration Form that automatically st
 ⏰ Automatic timestamp recording
 📊 Real-time registration data storage
 🧾 Easy customization for college, school, or sports events
+
 🛠️ Technologies Used
 Technology	Purpose
 HTML5	Website structure
 CSS3	Custom styling
 Bootstrap 5	Responsive design
-JavaScript (ES6)	Form handling and API requests
+JavaScript (ES6)	Form handling and API request
 Google Apps Script	Backend processing
 Google Sheets	Registration database
 
@@ -39,13 +40,16 @@ Soccer-Knockout-Challenge/
 │   ├── images/
 │   └── icons/
 └── README.md
-🧠 Google Sheets Integration
-1️⃣ Create a Google Sheet
 
+🧠 Google Sheets Integration
+
+1️⃣ Create a Google Sheet
 Create a new Google Sheet and add the following headers:
 
 Timestamp | Team Name | College Name | Captain Name | Contact | Email | Players
+
 2️⃣ Create Google Apps Script
+
 Open the Google Sheet.
 Navigate to Extensions → Apps Script.
 Replace the default code with:
@@ -69,6 +73,7 @@ function doPost(e) {
 Save the project.
 
 3️⃣ Deploy the Script
+
 Click Deploy → New Deployment
 Select Web App
 Configure:
@@ -122,8 +127,10 @@ document
 ▶️ Running the Project
 Clone the repository:
 git clone https://github.com/your-username/soccer-knockout-challenge.git
+
 Open the project folder.
 Launch index.html in your browser.
+
 📋 Registration Data
 
 All registrations are automatically stored in Google Sheets with:
@@ -135,20 +142,19 @@ Captain Name
 Contact Number
 Email Address
 Team Members
+
 🎯 Customization
 
 You can easily modify:
-
 Tournament name
 Theme colors
 Registration fields
 Hero section content
 Google Sheet columns
 Team size requirements
+
 📸 Preview
-
 A modern football tournament registration website featuring:
-
 Hero banner
 Tournament information
 Registration modal
@@ -156,7 +162,6 @@ Responsive design
 Google Sheets integration
 
 📄 License
-
 This project is open-source and available under the MIT License.
 
 Developed for Soccer Knockout Challenge 2025 ⚽
