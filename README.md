@@ -6,7 +6,9 @@ A modern, responsive one-page website for Soccer Knockout Challenge 2025, built 
 
 The website features an interactive Team Registration Form that automatically stores submissions in Google Sheets using Google Apps Script.
 
+
 🚀 Features
+
 🎨 Responsive Bootstrap 5 design
 ⚽ Modern sports-themed landing page
 🧑‍🤝‍🧑 Team Registration Modal Form
@@ -23,7 +25,9 @@ Bootstrap 5	Responsive design
 JavaScript (ES6)	Form handling and API requests
 Google Apps Script	Backend processing
 Google Sheets	Registration database
+
 📂 Project Structure
+
 Soccer-Knockout-Challenge/
 │
 ├── index.html
@@ -61,7 +65,9 @@ function doPost(e) {
 
   return ContentService.createTextOutput("Success");
 }
+
 Save the project.
+
 3️⃣ Deploy the Script
 Click Deploy → New Deployment
 Select Web App
@@ -111,6 +117,8 @@ document
       alert("Failed to submit registration.");
     }
   });
+
+  
 ▶️ Running the Project
 Clone the repository:
 git clone https://github.com/your-username/soccer-knockout-challenge.git
